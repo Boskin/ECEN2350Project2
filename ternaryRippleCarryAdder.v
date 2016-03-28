@@ -20,14 +20,16 @@ module ternaryRippleCarryAdder#(parameter N = 1)(
     
     genvar i;
     generate
-        // Chain the full adders with their carry signals
-        for(i = 0; i < N * 2; i = i + 1) begin: fullAdders
+        /* Chain the full adders with their carry signals,
+           increment the loop counter by 2 since each ternary
+           digit is represented by 2 binary digits */
+        for(i = 0; i < N * 2; i = i + 2) begin: fullAdders
             ternaryFullAdder(
-                sum[i + 1:i],
-                c[i + 2],
-                a[i + 1:i],
-                b[i + 1:i],
-                c[i]
+                sum[i + 1:i], // Sum (2 bits wide)
+                c[i + 2], // Output carry (1 bit wide)
+                a[i + 1:i], // Input 1 (2 bits wide)
+                b[i + 1:i], // Input 2 (2 bits wide)
+                c[i] // Input carry (1 bit wide)
             );
         end
     endgenerate
