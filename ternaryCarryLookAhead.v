@@ -47,7 +47,7 @@ module ternaryCarryLookAhead#(parameter N)(
             // MSb of sum digit
             assign s[i + 1] = ~c[i] & a[i] & b[i] | c[i] & a[i + 1] & b[i + 1] |
                 ~c[i] & a[i + 1] & ~b[i + 1] & ~b[i] | ~c[i] & ~a[i + 1] & ~a[i] & b[i + 1] |
-                c[i] & a[i] & ~b[i + 1] & ~b[i] | c[i] & ~a[i + 1] & ~a[i] & b[0];
+                c[i] & a[i] & ~b[i + 1] & ~b[i] | c[i] & ~a[i + 1] & ~a[i] & b[i];
             
             // LSb of sum digit
             assign s[i] = ~c[i] & a[i + 1] & b[i + 1] | c[i] & a[i + 1] & b[i] |
