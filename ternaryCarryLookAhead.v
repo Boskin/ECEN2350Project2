@@ -25,17 +25,22 @@ module ternaryCarryLookAhead#(parameter N)(
         for(i = 1; i < N * 2 - 1; i = i + 2) begin: remainingGenerateAndPropagate
             assign g[i] = 1;
             assign p[i] = 1;
-            assign carryTerms[i] = 1;
         end
-        assign carryTerms[N * 2 - 1] = 1;
         
-        for(i = 2; i <= N * 2; i = i + 2) begin: carries
-            assign carryTerms[i][2] = c[0] & (&p[i - 2:0]);
-            assign carryTerms[i][N * 2] = g[i - 2];
-            for(j = i - 2; j >= 4; j = j - 2) begin: carryTerms
-                assign carryTerms[i][j] = g[j - 2] & (&p[N * 2 - 2:j]);
+        for(i = 2; i <= N * 2; i = i + 2) begin: remainingCarryTerms
+            for(j = 1; j < N * 2; j = j + 2) begin: otherRemaining
+                assign carryTerms[i][j] = 0;
             end
-            assign c[i] = &carryTerms[i];
+        end
+        
+        for(i = 2; i <= N * 2; i = i + 2) begin: carryGenerate
+            assign carryTerms[i][0] = cIn & (&p[i - 2:0]);
+            assign carryTerms[i][i] = g[i - 2];
+            for(j = 2; j < i; j = j + 2) begin: carryProductTermGenerate
+                assign carryTerms[i][j] = g[j - 2] & (&p[i - 2:j]);
+            end
+            
+            assign c[i] = |carryTerms[i][i:0];
         end
         
         for(i = 0; i < N * 2; i = i + 2) begin: sums
