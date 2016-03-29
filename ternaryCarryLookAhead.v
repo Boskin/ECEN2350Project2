@@ -18,7 +18,7 @@ module ternaryCarryLookAhead#(parameter N)(
     genvar j;
     generate
         for(i = 0; i < N * 2; i = i + 2) begin: generateAndPropagate
-            assign g[i] = a[i + 1] & b[i + 1] | a[i] & b[i + 1] | a[i + 1] & b[0];
+            assign g[i] = a[i + 1] & b[i + 1] | a[i] & b[i + 1] | a[i + 1] & b[i];
             assign p[i] = a[i + 1] | b[i + 1] | a[i] & b[i];
         end
         
