@@ -4,7 +4,7 @@ module ternaryTwosCompliment#(parameter N = 1)(
 );
     genvar i;
     generate
-        for(i = 0; i < 2 * N; i = i + 2) begin: 
+        for(i = 0; i < 2 * N; i = i + 2) begin: complimentDigits
             assign out[i + 1] = ~in[i + 1] & ~in[i];
             assign out[i] = in[i];
         end
