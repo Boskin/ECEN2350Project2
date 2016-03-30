@@ -1,3 +1,5 @@
+/* Module that finds the two's compliment of an N-digit ternary
+   number */
 module ternaryTwosCompliment#(parameter N = 1)(
     output [N * 2 - 1:0] out,
     input [N * 2 - 1:0] in

@@ -1,5 +1,5 @@
-/* Ternary ripple carry adder that operates on N-ternary digit
-   numbers */
+/* Ternary adder that uses the ripple carry modular strategy
+   to add 2 N-digit ternary numbers */
 module ternaryRippleCarryAdder#(parameter N = 1)(
     output [N * 2 - 1:0] sum,
     output cOut,
