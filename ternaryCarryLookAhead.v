@@ -1,6 +1,7 @@
 module ternaryCarryLookAhead#(parameter N)(
     output [N * 2 - 1:0] s,
     output cOut,
+    output overflow,
     input [N * 2 - 1:0] a,
     input [N * 2 - 1:0] b,
     input cIn
@@ -13,6 +14,8 @@ module ternaryCarryLookAhead#(parameter N)(
     
     assign c[0] = cIn;
     assign cOut = c[N * 2];
+    
+    assign overflow = c[N * 2] ^ c[N * 2 - 2];
     
     genvar i;
     genvar j;
