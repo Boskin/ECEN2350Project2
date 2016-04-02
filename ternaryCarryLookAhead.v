@@ -1,5 +1,5 @@
 /* Ternary adder that uses the carry look ahead approach */
-module ternaryCarryLookAhead#(parameter N)(
+module ternaryCarryLookAhead#(parameter N = 1)(
     output [N * 2 - 1:0] s, // Sum
     output cOut, // Carry out
     output overflow, // Overflow indicator
